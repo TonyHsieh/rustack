@@ -6,6 +6,7 @@
 curl --header "Content-Type: application/json"  --request UPDATE   --data '{ "stackname" : "abc" , "data" : "xyz" }'    http://localhost:7878/api/stack
 
 INSERT INTO storage (stackname, data) VALUES ('abc', '123');
+
 --
 
 *POP
@@ -15,6 +16,7 @@ SELECT stackname, data, max(rowid) FROM storage WHERE stackname = 'abc';
 DELETE FROM storage WHERE rowid = (SELECT max(rowid) FROM storage) AND stackname = 'abc';
 
 --
+
 *PEEK (Doesn't work yet)
 curl --header "Content-Type: application/json"  --request GET --data '{"stackname":"abc"}'  http://localhost:7878/api/stack/peek
 
