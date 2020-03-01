@@ -2,19 +2,24 @@
 < put more stuff here later >
 
 
-PUSH
-curl --header "Content-Type: application/json"  --request UPDATE   --data '{"stack":"xyz","data":"xyz"}'    http://localhost:7878/api/stack
+*PUSH
+curl --header "Content-Type: application/json"  --request UPDATE   --data '{ "stackname" : "abc" , "data" : "xyz" }'    http://localhost:7878/api/stack
 
-insert into storage (stackname, data) values ('abc', '123');
+INSERT INTO storage (stackname, data) VALUES ('abc', '123');
+--
+
+*POP
+curl --header "Content-Type: application/json"  --request GET --data '{"stackname":"abc"}'  http://localhost:7878/api/stack
+
+SELECT stackname, data, max(rowid) FROM storage WHERE stackname = 'abc';
+DELETE FROM storage WHERE rowid = (SELECT max(rowid) FROM storage) AND stackname = 'abc';
+
+--
+*PEEK (Doesn't work yet)
+curl --header "Content-Type: application/json"  --request GET --data '{"stackname":"abc"}'  http://localhost:7878/api/stack/peek
+
+SELECT data FROM storage WHERE stackname = 'abc' ORDER BY rowid DESC;
 
 
-POP
-curl --header "Content-Type: application/json"  --request GET --data '{"stack":"xyz"}'  http://localhost:7878/api/stack
 
-delete from storage where rowid = (select min(rowid) and stackname = 'abc' from storage);
-
-
-PEEK 
-curl --header "Content-Type: application/json"  --request GET --data '{"stack":"xyz"}'  http://localhost:7878/api/stack/peek
-
-select data from storage where stackname = 'abc';
+[![Run on Repl.it](https://repl.it/badge/github/TonyHsieh/rustack)](https://repl.it/github/TonyHsieh/rustack)
