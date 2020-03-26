@@ -3,10 +3,12 @@ Still need
 + Get PEEK to work
 + Multi Threading
 + Real JSON routing system
-
 < put more stuff here later >
 
 HOW TO USE: 
+
+NOTE: Please make sure you execute "cargo run" first.
+
 
 *PUSH
 curl --header "Content-Type: application/json"  --request UPDATE   --data '{ "stackname" : "abc" , "data" : "xyz" }'    http://localhost:7878/api/stack

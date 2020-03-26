@@ -1,2 +1,3 @@
 run = "cargo run"
 language = "Rust"
+Hit the "RUN Button" 
